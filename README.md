@@ -29,18 +29,15 @@ See the shared task page for the full evaluation description and participation r
 
 ## Approach
 
-Both scripts fine-tune a pretrained transformer encoder independently for
-the sentiment and sarcasm tasks, using class-balanced cross-entropy loss to
-handle the sarcasm class imbalance (~19% positive in training data). Only
-open-source models/weights are used, consistent with the task's
-participation rules.
+`train_baseline.py` fine-tunes a pretrained transformer encoder (default:
+[`distilbert-base-uncased`](https://huggingface.co/distilbert-base-uncased))
+independently for the sentiment and sarcasm tasks, using class-balanced
+cross-entropy loss to handle the sarcasm class imbalance (~19% positive in
+training data). Only open-source models/weights are used, consistent with
+the task's participation rules.
 
-- `train_baseline.py` — default model `distilbert-base-uncased`. The
-  official baseline for this task; scores below are from this script.
-- `train_transformer.py` — same training code, default model `roberta-base`.
-  A stronger but slower alternative.
-
-Both accept `--model_name` to swap in any other Hugging Face encoder.
+Swap in any other Hugging Face encoder (e.g. `roberta-base`, which scores
+higher but trains slower) via `--model_name`.
 
 ## Data
 
@@ -71,8 +68,6 @@ pip install -r requirements.txt
 
 ```bash
 python train_baseline.py --data_dir data --out answer.csv
-# or, for the roberta-base variant:
-python train_transformer.py --data_dir data --out answer.csv
 ```
 
 This trains both task heads, writes predictions for `data/valid.csv` to
@@ -102,9 +97,6 @@ score on the public `valid.csv` set (dev-only, not used for final ranking):
 | sent-AU | sent-UK | sarc-AU | sarc-UK | **Final score** |
 |---|---|---|---|---|
 | 0.9106 | 0.9532 | 0.7135 | 0.6374 | **0.7740** |
-
-`train_transformer.py` (`roberta-base`) is provided as a stronger but
-slower alternative; participants are encouraged to benchmark it themselves.
 
 ## License
 
