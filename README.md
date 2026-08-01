@@ -33,8 +33,7 @@ See the shared task page for the full evaluation description and participation r
 [`distilbert-base-uncased`](https://huggingface.co/distilbert-base-uncased))
 independently for the sentiment and sarcasm tasks, using class-balanced
 cross-entropy loss to handle the sarcasm class imbalance (~19% positive in
-training data). Only open-source models/weights are used, consistent with
-the task's participation rules.
+training data). Only open-source models/weights are used.
 
 Swap in any other Hugging Face encoder (e.g. `roberta-base`, which scores
 higher but trains slower) via `--model_name`.
